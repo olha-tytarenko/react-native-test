@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-import {Header} from '../../components/header/header';
+import {View, Text} from 'react-native';
 
 type Props = {};
-export default class GistsScreen extends Component<Props> {
+export class GistsScreen extends Component<Props> {
   render() {
     return (
       <View>
-        <Header title="Gists" />
+        <Text>Gists</Text>
       </View>
     );
   }

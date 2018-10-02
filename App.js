@@ -1,35 +1,41 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import { NativeRouter, Route, Link } from 'react-router-native'
 import {ThemeProvider } from 'styled-components';
-import {Header} from './src/components/header/header';
-import {GistsScreen, RepositoriesScreen} from './src/screens';
 import {theme} from './styles/theme';
-import * as routes from './constants/routes';
+import {HomeScreen, RepositoriesScreen, GistsScreen} from './src/screens';
+import { createStackNavigator } from 'react-navigation';
+
+const RootStack = createStackNavigator({
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: () => ({
+      title: 'Home',
+      headerBackTitle: null
+    }),
+  },
+  Repositories: {
+    screen: RepositoriesScreen,
+    navigationOptions: () => ({
+      title: 'Repositories',
+      headerBackTitle: 'Home'
+    }),
+  },
+  Gists: {
+    screen: GistsScreen,
+    navigationOptions: () => ({
+      title: 'Gists',
+      headerBackTitle: 'Home'
+    }),
+  },
+},
+{
+  initialRouteName: 'Home',
+});
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <ThemeProvider theme={theme}>
-      <NativeRouter>
-        <View>
-          <Header title="Main page" />
-          <Link
-            to={routes.GISTS}
-          >
-            <Text>Gists</Text>
-          </Link>
-          <Link
-            to={routes.REPOSITORIES}
-          >
-            <Text>Repositories</Text>
-          </Link>
-          <Route path={routes.GISTS} component={GistsScreen}/>
-          <Route path={routes.REPOSITORIES} component={RepositoriesScreen}/>
-        </View>
-      </NativeRouter>
-      </ThemeProvider>
+      <RootStack />
     );
   }
 }
