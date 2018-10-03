@@ -1,12 +1,26 @@
 import React, {Component} from 'react';
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga';
+import { Provider } from 'react-redux';
 import {ThemeProvider } from 'styled-components';
 import {theme} from './styles/theme';
-import {HomeScreen, RepositoriesScreen, GistsScreen} from './src/screens';
+import {RepositoriesScreen, GistsScreen} from './src/screens';
+import {HomeScreenContainer} from './src/screens/home/container';
 import { createStackNavigator } from 'react-navigation';
+import { fetchGithubUsers } from './src/sagas/fetch-github-users.saga';
+import {usersReduncer} from './src/reducers/users-reducer';
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+  usersReduncer,
+  applyMiddleware(sagaMiddleware),
+);
+
+sagaMiddleware.run(fetchGithubUsers);
 
 const RootStack = createStackNavigator({
   Home: {
-    screen: HomeScreen,
+    screen: HomeScreenContainer,
     navigationOptions: () => ({
       title: 'Home',
       headerBackTitle: null
@@ -35,7 +49,9 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <RootStack />
+      <Provider store={store}>
+        <RootStack />
+      </Provider>
     );
   }
 }
