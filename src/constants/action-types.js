@@ -1,0 +1,3 @@
+export const FETCH_FAILED = 'FETCH_FAILED';
+export const FETCH_USERS = 'FETCH_USERS';
+export const SET_GITHUB_USERS = 'SET_GITHUB_USERS';

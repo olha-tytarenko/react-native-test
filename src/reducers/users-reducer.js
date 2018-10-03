@@ -1,11 +1,13 @@
+import * as actionTypes from '../constants/action-types';
+
 export const usersReduncer = (state = { users: [] }, action = {}) => {
   switch (action.type) {
-    case 'FETCH_FAILED':
+    case actionTypes.FETCH_FAILED:
       return {
         ...state,
         users: []
       };
-    case 'SET_GITHUB_USERS':
+    case actionTypes.SET_GITHUB_USERS:
       return {
         ...state,
         users: action.payload
