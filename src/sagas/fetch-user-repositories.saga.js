@@ -2,13 +2,13 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 
 import {fetchFailed} from '../actions/fetch-failde';
 import {setGithubUsers} from '../actions/set-github-users';
-import {USERS_URL} from '../constants/urls';
-import {FETCH_USERS} from '../constants/action-types';
+import {FETCH_REPOSITORIES_URL} from '../constants/urls';
+import {FETCH_USERSET_REPOSITORIES} from '../constants/action-types';
 
-function* fetchRecords() {
+function* fetchRecords(action) {
   let responseBody;
   try {
-      const response = yield call(fetch, USERS_URL);
+      const response = yield call(fetch, FETCH_REPOSITORIES_URL(action.payload));
       yield put(setGithubUsers(JSON.parse(response._bodyText)));
   } catch (e) {
       yield put(fetchFailed(e));
@@ -17,5 +17,5 @@ function* fetchRecords() {
 }
 
 export function* fetchGithubUsers() {
-  yield takeEvery(FETCH_USERS, fetchRecords);
+  yield takeEvery(FETCH_USERSET_REPOSITORIES, fetchRecords);
 }

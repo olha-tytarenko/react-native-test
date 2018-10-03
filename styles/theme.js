@@ -5,6 +5,7 @@ export const theme = {
     small: '12px',
     medium: '14px',
     large: '16px',
+    extraLarge: '24px',
   },
   defaultPadding: '10px',
 };
