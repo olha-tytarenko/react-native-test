@@ -1,21 +1,16 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 
-import {fetchFailed} from '../actions/fetch-failde';
-import {setGithubUsers} from '../actions/set-github-users';
-import {FETCH_REPOSITORIES_URL} from '../constants/urls';
-import {FETCH_USERSET_REPOSITORIES} from '../constants/action-types';
+import { fetchFailed } from '../actions/fetch-failde';
+import { setUserRepositories } from '../actions/set-user-repositories';
+import { fetchUserRepositoriesUrl } from '../constants/urls';
 
-function* fetchRecords(action) {
-  let responseBody;
+export function* fetchRepositories(action) {
+  console.log(fetchUserRepositoriesUrl);
   try {
-      const response = yield call(fetch, FETCH_REPOSITORIES_URL(action.payload));
-      yield put(setGithubUsers(JSON.parse(response._bodyText)));
+    const response = yield call(fetch, fetchUserRepositoriesUrl(action.payload));
+    yield put(setUserRepositories(JSON.parse(response._bodyText)));
   } catch (e) {
-      yield put(fetchFailed(e));
-      return;
+    yield put(fetchFailed(e));
+    return;
   }
-}
-
-export function* fetchGithubUsers() {
-  yield takeEvery(FETCH_USERSET_REPOSITORIES, fetchRecords);
 }

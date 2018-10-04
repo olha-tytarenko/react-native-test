@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button, FlatList, ActivityIndicator } from 'react-native';
+import { View, Button, FlatList, ActivityIndicator } from 'react-native';
 import styled from 'styled-components';
 import {styles} from './styles';
 
@@ -18,13 +18,19 @@ export class HomeScreen extends Component<Props> {
     this.props.fetchGithubUsers();
   }
 
+  handleRepositoriesButtonClick = (user) => {
+    this.props.setCurrentUser(user);
+    this.props.fetchUserRepositories(user.login);
+    this.props.navigation.navigate("Repositories");
+  }
+ 
   renderItem = (item) => (
     <View style={styles.container}>
       <UserLogin>{item.login}</UserLogin>
       <View style={styles.container}>
         <Button
           title="Repo"
-          onPress={() => this.props.navigation.navigate("Repositories")}
+          onPress={() => this.handleRepositoriesButtonClick(item)}
         />
         <Button
           title="Gists"
@@ -36,8 +42,7 @@ export class HomeScreen extends Component<Props> {
 
   render() {
     const { users } = this.props;
-    console.log(this.props);
-    console.log(users);
+
     return (
       <View>
         <FlatList 

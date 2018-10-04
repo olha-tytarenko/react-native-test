@@ -1,5 +1,6 @@
-import { RepositoriesScreen, GistsScreen } from './src/screens';
+import { GistsScreen } from './src/screens';
 import { HomeScreenContainer } from './src/screens/home/container';
+import { RepositoriesScreenContainer } from './src/screens/repositories/container'
 import { createStackNavigator } from 'react-navigation';
 
 export const RootStack = createStackNavigator({
@@ -11,7 +12,7 @@ export const RootStack = createStackNavigator({
     }),
   },
   Repositories: {
-    screen: RepositoriesScreen,
+    screen: RepositoriesScreenContainer,
     navigationOptions: () => ({
       title: 'Repositories',
       headerBackTitle: 'Home'
