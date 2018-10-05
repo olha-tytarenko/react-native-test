@@ -21,7 +21,17 @@ export class HomeScreen extends Component<Props> {
   handleRepositoriesButtonClick = (user) => {
     this.props.setCurrentUser(user);
     this.props.fetchUserRepositories(user.login);
-    this.props.navigation.navigate("Repositories");
+    this.props.navigation.navigate('Repositories', {
+      title: 'Repositories',
+    });
+  }
+
+  handleGistsButtonClick = (user) => {
+    this.props.setCurrentUser(user);
+    this.props.fetchUserGists(user.login);
+    this.props.navigation.navigate('Repositories', {
+      title: 'Gists',
+    });
   }
  
   renderItem = (item) => (
@@ -34,7 +44,7 @@ export class HomeScreen extends Component<Props> {
         />
         <Button
           title="Gists"
-          onPress={() => this.props.navigation.navigate("Gists")}
+          onPress={() => this.handleGistsButtonClick(item)}
         />
       </View>
     </View>

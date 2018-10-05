@@ -1,6 +1,12 @@
 import * as actionTypes from '../constants/action-types';
 
-export const usersReduncer = (state = { users: [] }, action = {}) => {
+const defaulState = {
+  users: [],
+  data: [],
+  isDataLoaded: false,
+};
+
+export const usersReduncer = (state = defaulState, action = {}) => {
   switch (action.type) {
     case actionTypes.FETCH_FAILED:
       return {
@@ -17,15 +23,17 @@ export const usersReduncer = (state = { users: [] }, action = {}) => {
         ...state,
         currentUser: action.payload,
       };
-    case actionTypes.SET_USER_REPOSITORIES:
+    case actionTypes.SET_USER_DATA:
       return {
         ...state,
-        repositories: action.payload,
+        data: action.payload,
+        isDataLoaded: true,
       };
-    case actionTypes.CLEAN_USER_REPOSITORIES:
+    case actionTypes.CLEAN_USER_DATA:
       return {
         ...state,
-        repositories: [],
+        data: [],
+        isDataLoaded: false,
       };
     default:
       return state;

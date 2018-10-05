@@ -1,5 +1,5 @@
-import {CLEAN_USER_REPOSITORIES} from '../constants/action-types';
+import {CLEAN_USER_DATA} from '../constants/action-types';
 
-export const cleanUserRepositories = () => ({
-  type: CLEAN_USER_REPOSITORIES,
+export const cleanUserData = () => ({
+  type: CLEAN_USER_DATA,
 });

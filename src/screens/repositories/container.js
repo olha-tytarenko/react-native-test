@@ -1,16 +1,15 @@
 import {connect} from 'react-redux';
 import {RepositoriesScreen} from './repositories';
-import {fetchUserRepositories} from '../../actions/fetch-user-repositories';
-import {cleanUserRepositories} from '../../actions/clean-user-repositories';
+import {cleanUserData} from '../../actions/clean-user-repositories';
 
-const mapStateToProps = ({ currentUser, repositories }) => ({
+const mapStateToProps = ({ currentUser, data, isDataLoaded }) => ({
 	currentUser,
-	repositories,
+	data,
+	isDataLoaded,
 });
 
 const mapDispatchToProps = {
-	fetchUserRepositories,
-	cleanUserRepositories,
+	cleanUserData,
 };
 
 export const RepositoriesScreenContainer = connect(mapStateToProps, mapDispatchToProps)(RepositoriesScreen);

@@ -14,7 +14,6 @@ export const RootStack = createStackNavigator({
   Repositories: {
     screen: RepositoriesScreenContainer,
     navigationOptions: () => ({
-      title: 'Repositories',
       headerBackTitle: 'Home'
     }),
   },
